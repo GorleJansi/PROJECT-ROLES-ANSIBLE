@@ -1,0 +1,21 @@
+- name: install rabbitmq server
+  dnf:
+    state: present
+    name: rabbitmq-server
+
+- name: service restart,enable
+  service:
+   name: rabbitmq-server
+   state: restarted
+   enabled: yes
+
+- name: create and provide permissions to user
+    community.rabbitmq.rabbitmq_user:
+      user: roboshop
+      password: roboshop123
+      permissions:
+        - vhost: /
+          configure_priv: .*
+          read_priv: .*
+          write_priv: .*
+      state: present  

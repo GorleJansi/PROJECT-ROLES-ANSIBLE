@@ -1,0 +1,14 @@
+- name: app setup
+  import_roles:
+    name: common
+    tasks_from: app-setup.yaml
+
+- name: nodejs setup
+  import_roles:
+    name: common
+    tasks_from: nodejs.yaml
+
+- name: system setup
+  import_roles:
+    name: common
+    tasks_from: system-setup.yaml

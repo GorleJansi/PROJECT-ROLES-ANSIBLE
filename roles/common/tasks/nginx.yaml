@@ -1,8 +1,0 @@
-    - name: disbale nginx
-      command: dnf module disable nginx -y
-    - name: enable nginx
-      command: dnf module enable nginx:1.24 -y  
-    - name: install nginx
-      dnf:
-        state: present
-        name: nginx
