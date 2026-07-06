@@ -1,0 +1,37 @@
+
+
+    - name: delete default html pages
+      file:
+        state: absent
+        path: /usr/share/nginx/html/
+
+    - name: create html directory
+      ansible.builtin.file:
+        path: /usr/share/nginx/html/
+        state: directory    
+
+    - name: delete old app code from /tmp
+      file:
+        state: absent
+        path: /tmp/frontend.zip
+
+    - name: download new app code
+      get_url:
+        url: https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
+        dest: /tmp/frontend.zip
+
+    - name: unarchieve downloaded code
+      unarchive:
+        src: /tmp/frontend.zip
+        dest: /usr/share/nginx/html/
+
+    - name: delete default nginx conf
+      ansible.builtin.file:
+        state: absent
+        path: /etc/nginx/nginx.conf   
+          
+    - name: copy nginx.conf 
+      template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+      notify: service-setup
