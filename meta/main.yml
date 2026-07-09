@@ -1,6 +1,5 @@
 ---
 galaxy_info:
-  namespace: gorlejansi
   role_name: roboshop_roles_ansible
   author: GorleJansi
   description: RoboShop application deployment roles for Ansible practice.
